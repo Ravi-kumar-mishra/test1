@@ -3,10 +3,10 @@ from PIL import Image
 import torch
 import torchvision.transforms as transforms
 
-# Load the model (explicitly setting device to CPU)
-model_path = 'model.pkl'
-device = torch.device("cpu")  # Force CPU usage
-model = torch.load(model_path, map_location=torch.device('cpu'))
+# Load the model
+model_path = 'C:/Users/RAHUL/Downloads/model.pth'
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model = torch.load(model_path, map_location=device)
 model.eval()
 
 class_names = ['MildDemented', 'ModerateDemented', 'NonDemented', 'VeryMildDemented']
@@ -50,5 +50,5 @@ def main():
                     with columns[j]:
                         st.image(uploaded_files[i + j], caption=f"Prediction: {prediction}", use_column_width=True)
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
